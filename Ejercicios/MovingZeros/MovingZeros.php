@@ -8,6 +8,6 @@ class MovingZeros
 {
     public static function moveZeros(array $items)
     {
-        return $items;
+        
     }
 }
