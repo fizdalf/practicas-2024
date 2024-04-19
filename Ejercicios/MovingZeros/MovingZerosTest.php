@@ -13,6 +13,11 @@ class MovingZerosTest extends TestCase
         $this->assertSame([],MovingZeros::moveZeros([]));
     }
 
+    public function testShouldReturnTheSameArrayWhenItReceivesAnUnexpectedArray()
+    {
+        $this->assertSame([1],MovingZeros::moveZeros([1]));
+    }
+
     public function testShouldReturnAnArrayWithZeroWhenItReceivesAnEmptyArrayWithZero()
     {
         $this->assertSame([0], MovingZeros::moveZeros([0]));
