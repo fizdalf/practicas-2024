@@ -4,6 +4,8 @@ namespace Ejercicios\MovingZeros;
 
 // Solo mover Ceros.
 
+use http\Exception;
+
 class MovingZeros
 {
         public static function moveZeros(array $items)
@@ -18,9 +20,15 @@ class MovingZeros
                 }
             }
             // No hay cero, no opero
-            if ($contaZero === 0){
+            if ($contaZero === 0) {
                 return $items;
             }
+
+            //Transformación de 0.0
+            $items = array_map(function($element){
+                return $element == "0.0" ? 0 : $element;
+            }, $items);
+
 
             //Separa cero
             $nZero = [];
