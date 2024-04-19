@@ -8,6 +8,8 @@ class MovingZeros
 {
         public static function moveZeros(array $items)
         {
+            //sreturn array_reverse($dato);
+
             //cuenta cero
             $contaZero = 0;
             foreach ($items as $element) {
