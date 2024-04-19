@@ -6,8 +6,31 @@ namespace Ejercicios\MovingZeros;
 
 class MovingZeros
 {
-    public static function moveZeros(array $items)
-    {
-        
-    }
+        public static function moveZeros(array $items)
+        {
+            //cuenta cero
+            $contaZero = 0;
+            foreach ($items as $element) {
+                if ($element === 0) {
+                    $contaZero++;
+                }
+            }
+            // No hay cero, no opero
+            if ($contaZero === 0){
+                return $items;
+            }
+
+            //Separa cero
+            $nZero = [];
+            $zeroNoConta = [];
+
+            foreach ($items as $element) {
+                if ($element === 0) {
+                    $nZero[] = $element;
+                } else {
+                    $zeroNoConta[] = $element;
+                }
+            }
+            return array_merge($zeroNoConta, $nZero);
+        }
 }
