@@ -2,8 +2,9 @@
 
 class userStories
 {
-    public static function userRegister($email, $password)
+    public static function userRegister()
     {
-        return true;
+        $nombre = fgets(STDIN);
+        echo "Hola $nombre";
     }
 }

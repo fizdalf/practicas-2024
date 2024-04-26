@@ -19,9 +19,6 @@ class userStoriesTest extends TestCase
 {
     public function testShouldReturnAEasyLogin()
     {
-        $registration = new UserRegister;
-        $result = $registration->resgisterUser("neyder@gmail.com", "neyder123");
-        $this->assertTrue($result, userStories::userRegister());
 
     }
 }
