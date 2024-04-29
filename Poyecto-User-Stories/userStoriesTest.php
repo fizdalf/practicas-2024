@@ -19,6 +19,16 @@ class userStoriesTest extends TestCase
 {
     public function testShouldReturnAEasyLogin()
     {
-
+        $this->assertEquals("Credenciales Correctas",
+                userStories::userLogin("usuario@gmail.com", "1234"));
+    }
+    public function testShouldReturnAEasyLogin1()
+    {
+        $this->assertEquals("Credenciales Incorrectas",
+                userStories::userLogin("usuarios@gmail.com", "12345"));
+    }
+    public function testShouldReturnAListAvaibleOfBooks(){
+        $books = $this->userStories->listAvaibleBooks();
+        $this->assertNotEmpty($books);
     }
 }
