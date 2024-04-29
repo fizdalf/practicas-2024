@@ -4,8 +4,7 @@ class userStories
 {
     public static function userRegister()
     {
-        $nombre = fgets(STDIN);
-        echo "Hola $nombre";
+        
     }
 
     public static function userLogin($email, $password)
@@ -20,8 +19,24 @@ class userStories
         }
     }
 
-    public static function listAvaibleBooks(){
+    public static function listAvailableBooks($books, $loans){
+        $availableBooks = array();
+        foreach ($books as $book){
+            if(!self::isBookOnLoan($book["id"], $loans)) {
+                $availableBooks[] = $book;
+            }
+        }
+        return $availableBooks;
+    }
 
-        return $this
+
+    public static function isBookOnLoan($bookId, $loans)
+    {
+        foreach ($loans as $loan) {
+            if ($loan['book_id'] == $bookId && !$loan['returned']) {
+                return true;
+            }
+        }
+        return false;
     }
 }

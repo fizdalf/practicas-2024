@@ -17,6 +17,12 @@ use PHPUnit\Framework\TestCase;
 
 class userStoriesTest extends TestCase
 {
+    protected $userStories;
+
+    public function testShouldReturnAnEasyRegister()
+    {
+        $this->assertEquals(userStories::userRegister());
+    }
     public function testShouldReturnAEasyLogin()
     {
         $this->assertEquals("Credenciales Correctas",
@@ -27,8 +33,41 @@ class userStoriesTest extends TestCase
         $this->assertEquals("Credenciales Incorrectas",
                 userStories::userLogin("usuarios@gmail.com", "12345"));
     }
-    public function testShouldReturnAListAvaibleOfBooks(){
-        $books = $this->userStories->listAvaibleBooks();
-        $this->assertNotEmpty($books);
+    public function testShouldReturnAvailableBooks()
+    {
+        $books = array(
+                array('id' => 1, 'title' => 'Cien años de soledad'),
+                array('id' => 2, 'title' => 'Don Quijote de la Mancha'),
+                array('id' => 3, 'title' => 'El código Da Vinci')
+        );
+
+        $loans = array(
+                array('book_id' => 1, 'returned' => false),
+                array('book_id' => 2, 'returned' => true),
+                array('book_id' => 3, 'returned' => false)
+        );
+
+
+        $availableBooks = userStories::listAvailableBooks($books, $loans);
+        $expectedResult = array(
+                array('id' => 2, 'title' => 'Don Quijote de la Mancha'),
+        );
+        $this->assertEquals($expectedResult, $availableBooks);
     }
+
+    public function testShouldReturnFalseForBookLoan()
+    {
+        $loans = array(
+                array('book_id' => 1, 'returned' => false),
+                array('book_id' => 2, 'returned' => true),
+                array('book_id' => 3, 'returned' => false)
+        );
+
+        $result1 = userStories::isBookOnLoan(1, $loans);
+        $result2 = userStories::isBookOnLoan(2, $loans);
+
+        $this->assertTrue($result1);
+        $this->assertFalse($result2);
+    }
+
 }
