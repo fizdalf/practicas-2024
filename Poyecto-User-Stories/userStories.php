@@ -4,7 +4,7 @@ class userStories
 {
     public static function userRegister()
     {
-        
+        return "registrao";
     }
 
     public static function userLogin($email, $password)
@@ -28,7 +28,6 @@ class userStories
         }
         return $availableBooks;
     }
-
 
     public static function isBookOnLoan($bookId, $loans)
     {
