@@ -7,18 +7,18 @@ interface LoanRepositoryInterface{
 }
 
 class UserStories{
-    private $bookrepository;
+    private $bookRepository;
     private $loanRepository;
 
     public function __construct(BookRepositoryInterface $bookRepository, LoanRepositoryInterface $loanRepository)
     {
-        $this->bookrepository = $bookRepository;
+        $this->bookRepository = $bookRepository;
         $this->loanRepository = $loanRepository;
     }
 
     public function userRegister()
     {
-        return "registrao";
+        return "registrado";
     }
 
     public function userLogin($email, $password)
@@ -33,25 +33,40 @@ class UserStories{
         }
     }
 
-    public function listAvaibleBooks()
+    public function listAvailableBooks()
     {
-        $books = $this->bookrepository->getBooks();
+        $books = $this->bookRepository->getBooks();
         $loans = $this->loanRepository->getLoans();
-        $avaibleBooks = array();
+        $availableBooks = array();
         foreach ($books as $book) {
-            if (!$this->isBookOnLean($book["id"], $loans)){
-                $avaibleBooks[] = $book;
+            if (!$this->isBookOnLoan($book["id"], $loans)){
+                $availableBooks[] = $book;
             }
         }
-        return $avaibleBooks;
+        return $availableBooks;
     }
 
-    public function isBookLoan($bookId, $loans){
+    public function isBookOnLoan($bookId, $loans){
         foreach ($loans as $loan){
             if ($loan["book_id"] == $bookId && !$loan["returned"]){
                 return true;
             }
         }
-        return true;
+        return false;
     }
+
+    public function searchBooks($keyword)
+    {
+        $books = $this->bookRepository->getBooks();
+        $foundBooks = array();
+        foreach ($books as $book){
+            if(stripos($book["title"], $keyword) !== false ||
+               stripos($book["author"], $keyword) !== false ||
+               stripos($book["publisher"], $keyword) !== false){
+                $foundBooks[] = $book;
+            }
+        }
+        return $foundBooks;
+    }
+
 }

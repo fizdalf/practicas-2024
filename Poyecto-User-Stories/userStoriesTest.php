@@ -15,59 +15,82 @@ require __DIR__.'/userStories.php';
 
 use PHPUnit\Framework\TestCase;
 
-class userStoriesTest extends TestCase
-{
-    protected $userStories;
-
-    public function testShouldReturnAnEasyRegister()
+    class UserStoriesTest extends TestCase
     {
-        $this->assertEquals(userStories::userRegister());
+        protected $userStories;
+
+        public function setUp(): void
+        {
+            $bookRepositoryMock = $this->createMock(BookRepositoryInterface::class);
+            $loanRepositoryMock = $this->createMock(LoanRepositoryInterface::class);
+            $this->userStories = new UserStories($bookRepositoryMock, $loanRepositoryMock);
+        }
+
+        public function testShouldReturnAnEasyRegister()
+        {
+            $this->assertEquals("registrado", $this->userStories->userRegister());
+        }
+
+        public function testShouldReturnAEasyLogin()
+        {
+            $this->assertEquals("Credenciales Correctas", $this->userStories->userLogin("usuario@gmail.com", "1234"));
+            $this->assertEquals("Credenciales Incorrectas", $this->userStories->userLogin("usuarios@gmail.com", "12345"));
+        }
+
+        public function testShouldReturnAvailableBooks()
+        {
+            $books = array(
+                    array('id' => 1, 'title' => 'Cien años de soledad'),
+                    array('id' => 2, 'title' => 'Don Quijote de la Mancha'),
+                    array('id' => 3, 'title' => 'El código Da Vinci')
+            );
+
+            $loans = array(
+                    array('book_id' => 1, 'returned' => false),
+                    array('book_id' => 2, 'returned' => true),
+                    array('book_id' => 3, 'returned' => false)
+            );
+
+            $this->userStories->listAvailableBooks();
+
+            $availableBooks = $this->userStories->listAvailableBooks();
+
+            $expectedResult = array(
+                    array('id' => 2, 'title' => 'Don Quijote de la Mancha'),
+            );
+
+            $this->assertEquals($expectedResult, $availableBooks);
+        }
+
+        public function testShouldReturnFalseForBookLoan()
+        {
+            $loans = array(
+                    array('book_id' => 1, 'returned' => false),
+                    array('book_id' => 2, 'returned' => true),
+                    array('book_id' => 3, 'returned' => false)
+            );
+
+            $result1 = $this->userStories->isBookOnLoan(1, $loans);
+            $result2 = $this->userStories->isBookOnLoan(2, $loans);
+
+            $this->assertTrue($result1);
+            $this->assertFalse($result2);
+        }
+        public function searchBooks(){
+            $books = array(
+                    array('id' => 1, 'title' => 'Cien años de soledad', 'author' => 'Gabriel García Márquez', 'publisher' => 'Editorial Sudamericana'),
+                    array('id' => 2, 'title' => 'Don Quijote de la Mancha', 'author' => 'Miguel de Cervantes', 'publisher' => 'Editorial Planeta'),
+                    array('id' => 3, 'title' => 'El código Da Vinci', 'author' => 'Dan Brown', 'publisher' => 'Editorial Norma')
+            );
+
+            $this->userStories->expects($this->once())
+                    ->method("get books")
+                    ->willReturn($books);
+
+            $searchResult = $this->userStories->SearchBooks("Cervantes");
+            $expectedREsult = array(
+                    array('id' => 2, 'title' => 'Don Quijote de la Mancha', 'author' => 'Miguel de Cervantes', 'publisher' => 'Editorial Planeta')
+            );
+            $this->assertEquals($expectedResult, $searchResult);
+        }
     }
-    public function testShouldReturnAEasyLogin()
-    {
-        $this->assertEquals("Credenciales Correctas",
-                userStories::userLogin("usuario@gmail.com", "1234"));
-    }
-    public function testShouldReturnAEasyLogin1()
-    {
-        $this->assertEquals("Credenciales Incorrectas",
-                userStories::userLogin("usuarios@gmail.com", "12345"));
-    }
-    public function testShouldReturnAvailableBooks()
-    {
-        $books = array(
-                array('id' => 1, 'title' => 'Cien años de soledad'),
-                array('id' => 2, 'title' => 'Don Quijote de la Mancha'),
-                array('id' => 3, 'title' => 'El código Da Vinci')
-        );
-
-        $loans = array(
-                array('book_id' => 1, 'returned' => false),
-                array('book_id' => 2, 'returned' => true),
-                array('book_id' => 3, 'returned' => false)
-        );
-
-
-        $availableBooks = userStories::listAvailableBooks($books, $loans);
-        $expectedResult = array(
-                array('id' => 2, 'title' => 'Don Quijote de la Mancha'),
-        );
-        $this->assertEquals($expectedResult, $availableBooks);
-    }
-
-    public function testShouldReturnFalseForBookLoan()
-    {
-        $loans = array(
-                array('book_id' => 1, 'returned' => false),
-                array('book_id' => 2, 'returned' => true),
-                array('book_id' => 3, 'returned' => false)
-        );
-
-        $result1 = userStories::isBookOnLoan(1, $loans);
-        $result2 = userStories::isBookOnLoan(2, $loans);
-
-        $this->assertTrue($result1);
-        $this->assertFalse($result2);
-    }
-
-}
