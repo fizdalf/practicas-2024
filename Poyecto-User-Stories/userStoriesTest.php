@@ -88,7 +88,7 @@ use PHPUnit\Framework\TestCase;
                     ->willReturn($books);
 
             $searchResult = $this->userStories->SearchBooks("Cervantes");
-            $expectedREsult = array(
+            $expectedResult = array(
                     array('id' => 2, 'title' => 'Don Quijote de la Mancha', 'author' => 'Miguel de Cervantes', 'publisher' => 'Editorial Planeta')
             );
             $this->assertEquals($expectedResult, $searchResult);
