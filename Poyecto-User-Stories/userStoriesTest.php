@@ -1,4 +1,4 @@
-<?php
+    <?php
 //User Stories:
 //Como usuario, quiero poder registrarme en la aplicación para que pueda acceder a los servicios.
 //Como usuario, quiero poder acceder con mis credenciales para que pueda utilizar la aplicación.
