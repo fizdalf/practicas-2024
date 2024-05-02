@@ -48,7 +48,7 @@ class UserStories{
 
     public function isBookLoan($bookId, $loans){
         foreach ($loans as $loan){
-            if ($loan["book_id"] == $bookId && !~$loan["returned"]){
+            if ($loan["book_id"] == $bookId && !$loan["returned"]){
                 return true;
             }
         }
