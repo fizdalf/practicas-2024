@@ -115,6 +115,26 @@ use PHPUnit\Framework\TestCase;
                 $updatedLoans = $this->userStories->getLoans();
                 $this->assertTrue($updatedLoans[$bookId - 1]['returned']);
             }
+        }
 
+        public function testShouldReturnAFailMarkWhenTheBookDoesNotExist()
+        {
+            $bookId = 4;
+            $loans = [
+                    ['book_id' => 1, 'returned' => false],
+                    ['book_id' => 2, 'returned' => true],
+                    ['book_id' => 3, 'returned' => false]
+            ];
+
+            $this->userStories->expects($this->once())
+                    ->method('getLoans')
+                    ->willReturn($loans);
+
+            $result = $this->userStories->markBookForReturn($bookId);
+
+            $this->assertFalse($result);
+
+            $updatedLoans = $this->userStories->getLoans();
+            $this->assertEquals($loans, $updatedLoans);
         }
     }
