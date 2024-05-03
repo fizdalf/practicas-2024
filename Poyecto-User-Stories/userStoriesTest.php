@@ -56,7 +56,7 @@ use PHPUnit\Framework\TestCase;
             $availableBooks = $this->userStories->listAvailableBooks();
 
             $expectedResult = array(
-                    array('id' => 2, 'title' => 'Don Quijote de la Mancha'),
+                    array('id' => 2, 'title' => 'Don Quijote de la Mancha')
             );
 
             $this->assertEquals($expectedResult, $availableBooks);
