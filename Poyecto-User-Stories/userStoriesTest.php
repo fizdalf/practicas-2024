@@ -93,4 +93,28 @@ use PHPUnit\Framework\TestCase;
             );
             $this->assertEquals($expectedResult, $searchResult);
         }
+
+        public function testShouldReturnAMarkedBook()
+        {
+            {
+                $bookId = 1;
+                $loans = [
+                        ['book_id' => 1, 'returned' => false],
+                        ['book_id' => 2, 'returned' => true],
+                        ['book_id' => 3, 'returned' => false]
+                ];
+
+                $this->userStories->expects($this->once())
+                        ->method('getLoans')
+                        ->willReturn($loans);
+
+                $result = $this->userStories->markBookForReturn($bookId);
+
+                $this->assertTrue($result);
+
+                $updatedLoans = $this->userStories->getLoans();
+                $this->assertTrue($updatedLoans[$bookId - 1]['returned']);
+            }
+
+        }
     }
