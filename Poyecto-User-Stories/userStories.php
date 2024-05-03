@@ -81,6 +81,7 @@ class UserStories{
         return true;
     }
 
+//Hacer el admin
 
 }
 
