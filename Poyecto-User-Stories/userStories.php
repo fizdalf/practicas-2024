@@ -1,4 +1,7 @@
 <?php
+
+//Separar en archivos distintos = Archivo por metodo.
+
 interface BookRepositoryInterface{
     public function getBooks(): array;
 }
