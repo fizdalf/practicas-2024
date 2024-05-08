@@ -18,7 +18,6 @@ class UserStories{
         $this->bookRepository = $bookRepository;
         $this->loanRepository = $loanRepository;
     }
-
     public function userRegister()
     {
         return "registrado";
