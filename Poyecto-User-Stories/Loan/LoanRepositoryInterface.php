@@ -21,5 +21,19 @@ class LoanBook{
         }
     }
     return false;
-}
+    }
+
+    public function searchBooks($keyword)
+    {
+        $books = $this->bookRepository->getBooks();
+        $foundBooks = array();
+        foreach ($books as $book){
+            if(stripos($book["title"], $keyword) !== false ||
+                    stripos($book["author"], $keyword) !== false ||
+                    stripos($book["publisher"], $keyword) !== false){
+                $foundBooks[] = $book;
+            }
+        }
+        return $foundBooks;
+    }
 }
