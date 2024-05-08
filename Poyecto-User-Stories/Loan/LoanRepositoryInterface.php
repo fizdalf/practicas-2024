@@ -36,4 +36,17 @@ class LoanBook{
         }
         return $foundBooks;
     }
+
+    public function markBookForReturn($bookId)
+    {
+        $loans = $this->loanRepository->getLoans();
+
+        foreach ($loans as &$loan) {
+            if ($loan['book_id'] == $bookId && !$loan['returned']) {
+                $loan['returned'] = true;
+            }
+        }
+
+        return true;
+    }
 }
