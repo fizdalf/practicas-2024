@@ -13,4 +13,13 @@ class LoanBook{
         }
         return $availableBooks;
     }
+
+    public function isBookOnLoan($bookId, $loans){
+    foreach ($loans as $loan){
+        if ($loan["book_id"] == $bookId && !$loan["returned"]){
+            return true;
+        }
+    }
+    return false;
+}
 }
