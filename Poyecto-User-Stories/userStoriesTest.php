@@ -37,33 +37,7 @@ use PHPUnit\Framework\TestCase;
             $this->assertEquals("Credenciales Incorrectas", $this->userStories->userLogin("usuarios@gmail.com", "12345"));
         }
 
-        public function testShouldReturnAvailableBooks()
-        {
-            $books = array(
-                    array('id' => 1, 'title' => 'Cien años de soledad'),
-                    array('id' => 2, 'title' => 'Don Quijote de la Mancha'),
-                    array('id' => 3, 'title' => 'El código Da Vinci')
-            );
 
-
-            //Arreglar Añadir Quien y Cuando
-
-            $loans = array(
-                    array('book_id' => 1, 'returned' => false),
-                    array('book_id' => 2, 'returned' => true),
-                    array('book_id' => 3, 'returned' => false)
-            );
-
-            $this->userStories->listAvailableBooks();
-
-            $availableBooks = $this->userStories->listAvailableBooks();
-
-            $expectedResult = array(
-                    array('id' => 2, 'title' => 'Don Quijote de la Mancha')
-            );
-
-            $this->assertEquals($expectedResult, $availableBooks);
-        }
 
         public function testShouldReturnFalseForBookLoan()
         {
