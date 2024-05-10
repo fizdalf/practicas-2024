@@ -15,7 +15,6 @@ public function testShouldReturnAvailableBooks()
     );
 
 
-    //Arreglar Añadir Quien y Cuando
 
     $loans = array(
             array('book_id' => 1, 'returned' => false, 'borrower' => 'Juan', 'borrowed_at' => '2024-05-10'),

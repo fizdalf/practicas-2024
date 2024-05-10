@@ -41,5 +41,4 @@ class MarkBookForReturnTest extends TestCase
         $this->assertEquals($returnDate, $updatedLoans[$bookId - 1]['return_date']);
     }
 
-    // Otros métodos de prueba relacionados con la devolución de libros
 }

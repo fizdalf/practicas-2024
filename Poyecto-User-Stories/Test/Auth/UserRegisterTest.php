@@ -20,5 +20,4 @@ class UserRegisterTest extends TestCase
         $this->assertEquals("registrado", $this->userStories->userRegister());
     }
 
-    // Otros métodos de prueba relacionados con el registro de usuarios
 }

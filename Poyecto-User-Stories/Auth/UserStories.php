@@ -14,5 +14,4 @@ class UserStories {
         $this->loanRepository = $loanRepository;
     }
 
-
 }

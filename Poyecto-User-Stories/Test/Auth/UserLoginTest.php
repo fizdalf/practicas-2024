@@ -25,5 +25,4 @@ class UserLoginTest extends TestCase
         $this->assertEquals("Credenciales Incorrectas", $this->userStories->userLogin("usuarios@gmail.com", "12345"));
     }
 
-    // Otros métodos de prueba relacionados con la autenticación de usuarios
 }

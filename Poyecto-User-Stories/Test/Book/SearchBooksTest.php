@@ -43,7 +43,7 @@ class SearchBooksTest extends TestCase
         $bookRepositoryMock = $this->createMock(BookRepositoryInterface::class);
         $bookRepositoryMock->method('getBooks')->willReturn($books);
 
-        $this->userStories = new UserStories($bookRepositoryMock, $loanRepositoryMock);
+        $this->userStories = new UserStories($bookRepositoryMock, $loanReposit++oryMock);
 
         $searchResult = $this->userStories->searchBooks("Gabriel García Márquez");
 
