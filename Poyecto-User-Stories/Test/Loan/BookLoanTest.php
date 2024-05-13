@@ -21,4 +21,18 @@ class BookLoanTest extends TestCase
         $this->assertEquals('PENDING', $bookLoan->status());
 
     }
+
+    function testShouldSetStatusToReturnedWhenMarkAsReturned(){
+        $bookLoan = new BookLoan(
+                1,
+                1,
+                1,
+                new DateTimeImmutable('2021-01-01 10:35:00'),
+                "PENDING"
+        );
+
+        $bookLoan->markAsReturned();
+
+        $this->assertEquals('RETURNED', $bookLoan->status());
+    }
 }

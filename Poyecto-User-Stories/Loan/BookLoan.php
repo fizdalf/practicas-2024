@@ -14,4 +14,9 @@ class BookLoan
     {
         return  $this->status;
     }
+
+    public function markAsReturned()
+    {
+        $this->status = 'RETURNED';
+    }
 }
