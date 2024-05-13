@@ -1,4 +1,9 @@
 {
+    "autoaload": {
+        "psr-4": {
+            "Practicas2024\\BookLoanSystem\\": "Proyecto-User-Stories"
+        }
+    },
     "require-dev": {
         "phpunit/phpunit": "10"
     },

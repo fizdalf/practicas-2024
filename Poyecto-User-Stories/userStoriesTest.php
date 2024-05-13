@@ -14,6 +14,9 @@
 require __DIR__.'/userStories.php';
 
 use PHPUnit\Framework\TestCase;
+use Practicas2024\BookLoanSystem\Loan\BookReturnProcessor;
+use Practicas2024\BookLoanSystem\Loan\LoanRepository;
+use Practicas2024\BookLoanSystem\Loan\PendingToReturnBookLoanFinder;
 
     class UserStoriesTest extends TestCase
     {
