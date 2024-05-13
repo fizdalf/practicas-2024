@@ -110,6 +110,20 @@ class UserStoriesTest extends TestCase
                         )
                 );
 
+        $loanRepository
+                ->expects($this->once())
+            ->method('save')
+            ->with(
+                    new BookLoan(
+                            1,
+                            $bookId,
+                            1,
+                            new DateTimeImmutable('2021-01-01 10:35:00'),
+                            "RETURNED"
+                    )
+            );
+
+
         $bookReturnProcessor->__invoke($bookId);
 
     }
