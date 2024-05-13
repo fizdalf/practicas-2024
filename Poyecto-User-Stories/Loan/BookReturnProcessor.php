@@ -18,6 +18,8 @@ class BookReturnProcessor
     {
         $bookLoan = $this->finder->__invoke($bookId);
 
+        $bookLoan->markAsReturned();
+
         $this->repository->save($bookLoan);
     }
 }
