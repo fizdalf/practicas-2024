@@ -109,6 +109,9 @@ class UserStoriesTest extends TestCase
                                 "PENDING"
                         )
                 );
+
+        $bookReturnProcessor->__invoke($bookId);
+
     }
 
     public function testShouldReturnAFailMarkWhenTheBookDoesNotExist()
