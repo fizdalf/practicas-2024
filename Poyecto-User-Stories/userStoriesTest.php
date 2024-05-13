@@ -15,8 +15,10 @@ require __DIR__ . '/userStories.php';
 require __DIR__.'/Loan/PendingToReturnBookLoanFinder.php';
 require __DIR__.'/Loan/LoanRepository.php';
 require __DIR__.'/Loan/BookReturnProcessor.php';
+require __DIR__.'/Loan/BookLoan.php';
 
 use PHPUnit\Framework\TestCase;
+use Practicas2024\BookLoanSystem\Loan\BookLoan;
 use Practicas2024\BookLoanSystem\Loan\BookReturnProcessor;
 use Practicas2024\BookLoanSystem\Loan\LoanRepository;
 use Practicas2024\BookLoanSystem\Loan\PendingToReturnBookLoanFinder;
