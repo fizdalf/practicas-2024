@@ -6,14 +6,18 @@ class BookReturnProcessor
 {
 
     private PendingToReturnBookLoanFinder $finder;
+    private LoanRepository $repository;
 
-    public function __construct(PendingToReturnBookLoanFinder $finder)
+    public function __construct(PendingToReturnBookLoanFinder $finder, LoanRepository $repository)
     {
         $this->finder = $finder;
+        $this->repository = $repository;
     }
 
     public function __invoke(int $bookId)
     {
-        $this->finder->__invoke($bookId);
+        $bookLoan = $this->finder->__invoke($bookId);
+
+        $this->repository->save($bookLoan);
     }
 }
