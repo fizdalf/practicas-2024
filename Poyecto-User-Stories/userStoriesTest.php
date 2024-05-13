@@ -96,31 +96,35 @@ class UserStoriesTest extends TestCase
 
         $bookId = 1;
 
+        $bookLoan = new BookLoan(
+                1,
+                $bookId,
+                1,
+                new DateTimeImmutable('2021-01-01 10:35:00'),
+                "PENDING"
+        );
+
         $pendingToReturnBookLoanFinder
                 ->expects($this->once())
                 ->method('__invoke')
                 ->with($bookId)
-                ->willReturn(
-                        new BookLoan(
-                                1,
-                                $bookId,
-                                1,
-                                new DateTimeImmutable('2021-01-01 10:35:00'),
-                                "PENDING"
-                        )
-                );
+                ->willReturn($bookLoan);
 
         $loanRepository
                 ->expects($this->once())
             ->method('save')
-            ->with(
-                    new BookLoan(
-                            1,
-                            $bookId,
-                            1,
-                            new DateTimeImmutable('2021-01-01 10:35:00'),
-                            "RETURNED"
-                    )
+            ->willReturnCallback(
+                    function(BookLoan $savedBookLoan) use ($bookLoan) {
+
+                        if($bookLoan !== $savedBookLoan ){
+                            throw new Exception('Book loan are not the same');
+                        }
+
+                        if($savedBookLoan->status() !== 'RETURNED'){
+                            throw new Exception('Book loan is not returned!');
+                        }
+                    }
+
             );
 
 
