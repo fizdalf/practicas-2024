@@ -2,7 +2,7 @@
 
 require_once 'src/Book/BookRepositoryInterface.php';
 require_once 'src/Book/YourBookRepository.php';
-require_once 'src/Loan/LoanRepositoryInterface.php';
+require_once 'src/Loan/LoanRepository.php';
 require_once 'src/Loan/YourLoanRepository.php';
 
 class UserStories {
