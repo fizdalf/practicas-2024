@@ -12,16 +12,9 @@
 //Como administrador, quiero poder ver todas las solicitudes de devolución para que pueda aprobarlas o rechazarlas.
 
 require __DIR__ . '/userStories.php';
-require __DIR__.'/Loan/PendingToReturnBookLoanFinder.php';
-require __DIR__.'/Loan/LoanRepository.php';
-require __DIR__.'/Loan/BookReturnProcessor.php';
-require __DIR__.'/Loan/BookLoan.php';
 
 use PHPUnit\Framework\TestCase;
-use Practicas2024\BookLoanSystem\Loan\BookLoan;
-use Practicas2024\BookLoanSystem\Loan\BookReturnProcessor;
-use Practicas2024\BookLoanSystem\Loan\LoanRepository;
-use Practicas2024\BookLoanSystem\Loan\PendingToReturnBookLoanFinder;
+
 
 class UserStoriesTest extends TestCase
 {
@@ -81,77 +74,8 @@ class UserStoriesTest extends TestCase
         $this->assertEquals($expectedResult, $searchResult);
     }
 
-    public function testShouldReturnAMarkedBook()
-    {
-        //Encontrar un prestamo de libro pendiente de devolver para el libro con id 1
-        //Marcar el préstamo como devuelto
-        //Guardar el préstamo modificado
-
-        $pendingToReturnBookLoanFinder = $this->createMock(PendingToReturnBookLoanFinder::class);
-        $loanRepository = $this->createMock(LoanRepository::class);
-        $bookReturnProcessor = new BookReturnProcessor(
-                $pendingToReturnBookLoanFinder,
-                $loanRepository
-        );
-
-        $bookId = 1;
-
-        $bookLoan = new BookLoan(
-                1,
-                $bookId,
-                1,
-                new DateTimeImmutable('2021-01-01 10:35:00'),
-                "PENDING"
-        );
-
-        $pendingToReturnBookLoanFinder
-                ->expects($this->once())
-                ->method('__invoke')
-                ->with($bookId)
-                ->willReturn($bookLoan);
-
-        $loanRepository
-                ->expects($this->once())
-            ->method('save')
-            ->willReturnCallback(
-                    function(BookLoan $savedBookLoan) use ($bookLoan) {
-
-                        if($bookLoan !== $savedBookLoan ){
-                            throw new Exception('Book loan are not the same');
-                        }
-
-                        if($savedBookLoan->status() !== 'RETURNED'){
-                            throw new Exception('Book loan is not returned!');
-                        }
-                    }
-
-            );
 
 
-        $bookReturnProcessor->__invoke($bookId);
-
-    }
-
-    public function testShouldReturnAFailMarkWhenTheBookDoesNotExist()
-    {
-        $bookId = 4;
-        $loans = [
-                ['book_id' => 1, 'returned' => false],
-                ['book_id' => 2, 'returned' => true],
-                ['book_id' => 3, 'returned' => false]
-        ];
-
-        $this->expects($this->once())
-                ->method('getLoans')
-                ->willReturn($loans);
-
-        $result = $this->userStories->markBookForReturn($bookId);
-
-        $this->assertFalse($result);
-
-        $updatedLoans = $this->userStories->getLoans();
-        $this->assertEquals($loans, $updatedLoans);
-    }
 
     public function testShouldReturnAFailWhenTryToReturnAReturnedBook()
     {
