@@ -13,5 +13,4 @@ class UserStories {
         $this->bookRepository = $bookRepository;
         $this->loanRepository = $loanRepository;
     }
-
 }

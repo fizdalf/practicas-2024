@@ -24,7 +24,7 @@ class SearchBooksTest extends TestCase
         $bookRepositoryMock = $this->createMock(BookRepositoryInterface::class);
         $bookRepositoryMock->method('getBooks')->willReturn($books);
 
-        $this->userStories = new UserStories($bookRepositoryMock, $loanRepositoryMock);
+        $this->userStories = new UserStories($bookRepositoryMock, $this->loanRepositoryMock);
 
         $searchResult = $this->userStories->searchBooks("Cien años de soledad");
 
