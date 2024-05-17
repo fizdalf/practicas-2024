@@ -7,4 +7,10 @@ class YourBookRepository implements BookRepositoryInterface {
                 ['id' => 3, 'title' => 'Libro 3']
         ];
     }
+
+    public function addBook($book): bool
+    {
+        $this->books[]= $book;
+        return true;
+    }
 }
