@@ -73,15 +73,15 @@ class UserStories{
     public function markBookForReturn($bookId)
     {
         $loans = $this->loanRepository->getLoans();
-
         foreach ($loans as &$loan) {
             if ($loan['book_id'] == $bookId && !$loan['returned']) {
                 $loan['returned'] = true;
+                return true;
             }
         }
-
-        return true;
+        return false;
     }
+
 
 //Hacer el admin
 

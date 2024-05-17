@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once 'src/Auth/UserStories.php';
+require_once '';
 
 class MarkBookForReturnTest extends TestCase
 {
