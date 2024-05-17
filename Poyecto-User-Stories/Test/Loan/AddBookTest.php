@@ -32,4 +32,22 @@ class AddBookTest extends TestCase
         $result = $this->userStories->addBook($newBook);
         $this->assertTrue($result);
     }
+
+    public function testShouldFailToAddBookWithoutTitle()
+    {
+        $newBook = [
+                'id' => 5,
+                'title' => '',
+                'author' => 'Anonymous',
+                'publisher' => 'Unknown'
+        ];
+
+        $this->bookRepositoryMock->expects($this->once())
+                ->method('addBook')
+                ->with($newBook)
+                ->willReturn(false);
+
+        $result = $this->userStories->addBook($newBook);
+        $this->assertFalse($result);
+    }
 }
