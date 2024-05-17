@@ -1,7 +1,5 @@
 <?php
 
-
-
 class LoanBook{
     public function getLoans(): array{
         return [

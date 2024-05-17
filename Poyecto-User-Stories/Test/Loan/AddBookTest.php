@@ -14,3 +14,4 @@ class AddBookTest extends TestCase
         $loanRepositoryMock = $this->createMock(LoanRepositoryInterface::class);
         $this->userStories = new UserStories($this->bookRepositoryMock, $loanRepositoryMock);
     }
+}
