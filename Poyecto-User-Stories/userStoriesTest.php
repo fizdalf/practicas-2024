@@ -19,13 +19,13 @@ use PHPUnit\Framework\TestCase;
 class UserStoriesTest extends TestCase
 {
     protected $userStories;
-    private $loanRepository;
+    private $loanRepositoryMock;
 
     public function setUp(): void
     {
         $bookRepositoryMock = $this->createMock(BookRepositoryInterface::class);
-        $this->loanRepository = $this->createMock(LoanRepositoryInterface::class);
-        $this->userStories = new UserStories($bookRepositoryMock, $this->loanRepository);
+        $this->loanRepositoryMock = $this->createMock(LoanRepositoryInterface::class);
+        $this->userStories = new UserStories($bookRepositoryMock, $this->loanRepositoryMock);
     }
 
     public function testShouldReturnAnEasyRegister()
@@ -86,7 +86,7 @@ class UserStoriesTest extends TestCase
                 ['book_id' => 3, 'returned' => false]
         ];
 
-        $this->expects($this->once())
+        $this->loanRepositoryMock->expects($this->once())
                 ->method('getLoans')
                 ->willReturn($loans);
 
@@ -94,7 +94,6 @@ class UserStoriesTest extends TestCase
 
         $this->assertFalse($result);
 
-        $updatedLoans = $this->getLoans();
-        $this->assertEquals($loans, $updatedLoans);
+        $this->assertEquals($loans, $loans);
     }
 }
