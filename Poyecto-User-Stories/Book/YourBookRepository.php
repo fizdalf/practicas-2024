@@ -10,7 +10,10 @@ class YourBookRepository implements BookRepositoryInterface {
 
     public function addBook($book): bool
     {
-        $this->books[]= $book;
+        if (empty($book['title']) || empty($book['author']) || empty($book['publisher'])) {
+            return false;
+        }
+        $this->books[] = $book;
         return true;
     }
 }
