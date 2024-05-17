@@ -9,6 +9,7 @@
 //Como usuario, quiero poder marcar un libro para devolver.
 //Como administrador, quiero poder agregar nuevos libros al sistema para que los usuarios puedan pedirlos prestados.
 //Como administrador, quiero poder ver todas las solicitudes de préstamo para que pueda aprobarlas o rechazarlas.
+//FAlta este
 //Como administrador, quiero poder ver todas las solicitudes de devolución para que pueda aprobarlas o rechazarlas.
 
 require_once __DIR__ . '/userStories.php';
