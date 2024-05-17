@@ -96,4 +96,22 @@ class UserStoriesTest extends TestCase
 
         $this->assertEquals($loans, $loans);
     }
+
+    public function testShouldAddBookSuccessfully()
+    {
+        $newBook = [
+                'id' => 4,
+                'title' => '1984',
+                'author' => 'George Orwell',
+                'publisher' => 'Secker & Warburg'
+        ];
+
+        $this->bookRepositoryMock->expects($this->once())
+                ->method('addBook')
+                ->with($newBook)
+                ->willReturn(true);
+
+        $result = $this->userStories->addBook($newBook);
+        $this->assertTrue($result);
+    }
 }
