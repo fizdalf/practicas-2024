@@ -1,7 +1,9 @@
 <?php
 
-require_once 'Poyecto-User-Stories/Book/BookRepositoryInterface.php';
-require_once 'Poyecto-User-Stories/Loan/LoanRepositoryInterface.php';
+require_once __DIR__ . '/src/Book/BookRepositoryInterface.php';
+require_once __DIR__ . '/src/Book/YourBookRepository.php';
+require_once __DIR__ . '/src/Loan/LoanRepositoryInterface.php';
+require_once __DIR__ . '/src/Loan/YourLoanRepository.php';
 
 //Separar en archivos distintos = Archivo por metodo.
 

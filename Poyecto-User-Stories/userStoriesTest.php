@@ -11,10 +11,11 @@
 //Como administrador, quiero poder ver todas las solicitudes de préstamo para que pueda aprobarlas o rechazarlas.
 //Como administrador, quiero poder ver todas las solicitudes de devolución para que pueda aprobarlas o rechazarlas.
 
-require __DIR__ . '/userStories.php';
+require_once __DIR__ . '/userStories.php';
+require_once __DIR__ . '/vendor/autoload.php';
+
 
 use PHPUnit\Framework\TestCase;
-
 
 class UserStoriesTest extends TestCase
 {
