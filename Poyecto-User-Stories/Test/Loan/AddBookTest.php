@@ -1,6 +1,13 @@
 <?php
 
+
 namespace Practicas2024\BookLoanSystem\Loan;
+
+require_once 'src/Book/BookRepositoryInterface.php';
+require_once 'src/Book/YourBookRepository.php';
+require_once 'src/Auth/UserStories.php';
+require_once 'src/Loan/LoanRepositoryInterface.php';
+
 use PHPUnit\Framework\TestCase;
 
 class AddBookTest extends TestCase

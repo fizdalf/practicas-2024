@@ -8,8 +8,7 @@ class YourBookRepository implements BookRepositoryInterface {
         ];
     }
 
-    public function addBook($book): bool
-    {
+    public function addBook($book): bool {
         if (empty($book['title']) || empty($book['author']) || empty($book['publisher'])) {
             return false;
         }

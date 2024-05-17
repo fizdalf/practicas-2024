@@ -1,5 +1,8 @@
 <?php
 
+require_once 'Poyecto-User-Stories/Book/BookRepositoryInterface.php';
+require_once 'Poyecto-User-Stories/Loan/LoanRepositoryInterface.php';
+
 //Separar en archivos distintos = Archivo por metodo.
 
 interface BookRepositoryInterface{
@@ -84,25 +87,10 @@ class UserStories{
 
 
 //Hacer el admin
-    public function testShouldAddBookSuccessfully()
-    {
-        $newBook = [
-                'id' => 4,
-                'title' => '1984',
-                'author' => 'George Orwell',
-                'publisher' => 'Secker & Warburg'
-        ];
 
-        $this->bookRepositoryMock->expects($this->once())
-                ->method('addBook')
-                ->with($newBook)
-                ->willReturn(true);
-
-        $result = $this->userStories->addBook($newBook);
-        $this->assertTrue($result);
+    public function addBook($book): bool {
+        return $this->bookRepository->addBook($book);
     }
-
-
 }
 
 

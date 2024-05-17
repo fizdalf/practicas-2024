@@ -2,7 +2,7 @@
 
 namespace  Practicas2024\BookLoanSystem\Loan;
 
-interface LoanRepository
+interface LoanRepositoryInterface
 {
     public function getLoan(): array;
 

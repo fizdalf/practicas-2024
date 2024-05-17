@@ -6,7 +6,7 @@ use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 require __DIR__.'/../../Loan/PendingToReturnBookLoanFinder.php';
-require __DIR__.'/../../Loan/LoanRepository.php';
+require __DIR__ . '/../../Loan/LoanRepositoryInterface.php';
 require __DIR__.'/../../Loan/BookReturnProcessor.php';
 require __DIR__.'/../../Loan/BookLoan.php';
 
@@ -20,7 +20,7 @@ class BookReturnProcessorTest extends TestCase
         //Guardar el préstamo modificado
 
         $pendingToReturnBookLoanFinder = $this->createMock(PendingToReturnBookLoanFinder::class);
-        $loanRepository = $this->createMock(LoanRepository::class);
+        $loanRepository = $this->createMock(LoanRepositoryInterface::class);
         $bookReturnProcessor = new BookReturnProcessor(
                 $pendingToReturnBookLoanFinder,
                 $loanRepository

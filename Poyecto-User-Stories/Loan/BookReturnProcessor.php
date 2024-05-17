@@ -6,9 +6,9 @@ class BookReturnProcessor
 {
 
     private PendingToReturnBookLoanFinder $finder;
-    private LoanRepository $repository;
+    private LoanRepositoryInterface $repository;
 
-    public function __construct(PendingToReturnBookLoanFinder $finder, LoanRepository $repository)
+    public function __construct(PendingToReturnBookLoanFinder $finder, LoanRepositoryInterface $repository)
     {
         $this->finder = $finder;
         $this->repository = $repository;
