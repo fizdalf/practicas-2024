@@ -143,4 +143,27 @@ class UserStoriesTest extends TestCase
         }
         return false;
     }
+
+    public function testProcessReturnRequest() {
+        $loanId = 1;
+        $loans = [
+                ['loan_id' => 1, 'book_id' => 1, 'returned' => true, 'approved' => false],
+                ['loan_id' => 2, 'book_id' => 2, 'returned' => true, 'approved' => true]
+        ];
+
+        $this->loanRepository
+                ->method('getLoans')
+                ->willReturn($loans);
+
+        $this->loanRepository
+                ->expects($this->once())
+                ->method('updateLoan')
+                ->with($this->callback(function($loan) use ($loanId) {
+                    return $loan['loan_id'] == $loanId && $loan['approved'] == true;
+                }))
+                ->willReturn(true);
+
+        $result = $this->userStories->processReturnRequest($loanId, true);
+        $this->assertTrue($result);
+    }
 }
