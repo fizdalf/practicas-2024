@@ -93,6 +93,15 @@ class UserStories{
     public function addBook($book): bool {
         return $this->bookRepository->addBook($book);
     }
+
+    public function viewReturnRequests()
+    {
+        $loans = $this->loanRepository->getLoans();
+        $returnRequests = array_filter($loans, function($loan){
+            return $loan["returned"] && !$loan["approved"];
+        });
+        return $returnRequests;
+    }
 }
 
 
