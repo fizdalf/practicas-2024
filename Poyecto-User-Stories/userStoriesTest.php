@@ -166,4 +166,19 @@ class UserStoriesTest extends TestCase
         $result = $this->userStories->processReturnRequest($loanId, true);
         $this->assertTrue($result);
     }
+
+    public function testProcessReturnRequestFail() {
+        $loanId = 3;
+        $loans = [
+                ['loan_id' => 1, 'book_id' => 1, 'returned' => true, 'approved' => false],
+                ['loan_id' => 2, 'book_id' => 2, 'returned' => true, 'approved' => true]
+        ];
+
+        $this->loanRepository
+                ->method('getLoans')
+                ->willReturn($loans);
+
+        $result = $this->userStories->processReturnRequest($loanId, true);
+        $this->assertFalse($result);
+    }
 }
