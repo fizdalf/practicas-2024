@@ -116,4 +116,21 @@ class UserStoriesTest extends TestCase
         $result = $this->userStories->addBook($newBook);
         $this->assertTrue($result);
     }
+
+    public function testViewReturnRequests()
+    {
+        $loans = [
+                ['loan_id' => 1, 'book_id' => 1, 'returned' => true, 'approved' => false],
+                ['loan_id' => 2, 'book_id' => 2, 'returned' => true, 'approved' => true],
+                ['loan_id' => 3, 'book_id' => 3, 'returned' => false, 'approved' => false]
+        ];
+        $this->loanRepository->method("getLoans")->willReturn($loans);
+
+        $result = this->userStories->viewReturnRequests();
+        $expectedResult = [
+                ['loan_id' => 1, 'book_id' => 1, 'returned' => true, 'approved' => false]
+        ];
+
+        $this->assertEquals($expectedResult, $result);
+    }
 }
