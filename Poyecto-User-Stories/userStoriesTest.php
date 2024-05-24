@@ -133,4 +133,14 @@ class UserStoriesTest extends TestCase
 
         $this->assertEquals($expectedResult, $result);
     }
+    public function processReturnRequest($loanId, $approved) {
+        $loans = $this->loanRepository->getLoans();
+        foreach ($loans as &$loan) {
+            if ($loan['loan_id'] == $loanId) {
+                $loan['approved'] = $approved;
+                return true;
+            }
+        }
+        return false;
+    }
 }
